@@ -1,0 +1,70 @@
+<body class="bg-gradient-to-b from-[#006D77] to-[#83C5BE]">
+    <div class="flex h-screen min-h-[700px]">
+        <div class="flex flex-col justify-center container md:w-full xl:w-1/2 flex-shrink-0 flex-grow-0 px-20 py-20 bg-white rounded-r-[25px] max-md:px-8 max-lg:rounded-none min-h-[700px]">
+            <h1 class="text-5xl font-medium max-md:text-4xl lg:pt-12 max-sm:pt-10">Вітаємо!</h1>
+            <div class="container pt-2">
+                <p class="text-[#6C6C6C] text-lg font-normal inline">Немає акаунту? </p>
+                <p class="text-[#6C6C6C] text-lg font-normal inline hover:underline cursor-pointer" routerLink="/register">Зареєструйтесь</p>
+            </div>
+
+            <form>
+                <div class="container py-3 pt-7">
+                    <label class="text-lg" for="email-input">Email <span class="text-red-600 font-bold">*</span></label>
+                    <br />
+                    <input id="email-input" type="text" class="text-lg px-3 border-[1px] border-[#CACACA] mt-2 h-11 w-full font-[400] opacity-60" placeholder="Введіть email" />
+                </div>
+    
+                <div class="container py-3">
+                    <label class="text-lg" for="password-input">Пароль <span class="text-red-600 font-bold">*</span></label>
+                    <br />
+                    <div class="flex items-center border-[1px] border-[#CACACA] mt-2 h-11 w-full">
+                        <input 
+                            id="password-input" 
+                            [type]="passwordVisible ? 'text' : 'password'" 
+                            class="text-lg px-3 w-full font-[400] opacity-60 h-full" 
+                            placeholder="Введіть пароль" 
+                        />
+                        <span 
+                            (click)="togglePasswordVisibility()" 
+                            class="cursor-pointer ml-2 mt-1 mr-3"
+                        >
+                            <span class="material-icons">
+                                {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+                            </span>
+                        </span>
+                    </div>
+                </div>                          
+
+                <div class="container py-3 flex w-full">
+                    <div class="w-1/2 flex items-center">
+                        <input id="remember-me" type="checkbox" class="size-4">
+                        <label for="remember-me" class="text-[#686868] ml-2 text-lg hover:cursor-pointer">Запам'ятати мене</label>
+                    </div>
+
+                    <div class="w-1/2 flex justify-end items-center self-end text-right">
+                        <a class="text-lg text-[#686868] font-semibold hover:underline cursor-pointer">Забули пароль?</a>
+                    </div>
+                </div>
+
+                <div class="container py-3 w-full">
+                    <button type="submit" class="w-full bg-[#006D77] h-16 text-white text-lg hover:bg-[#308D91] duration-300">Увійти</button>
+                </div>
+            </form>
+
+            <div class="flex items-center my-4">
+                <hr class="flex-1 border-t-[1px] border-gray-300">
+                <span class="mx-4 text-gray-600">Або</span>
+                <hr class="flex-1 border-t-[1px] border-gray-300">
+            </div>
+
+            <form>
+                <div class="container py-3 w-full">
+                    <button type="submit" class="w-full h-16 border-[1px] border-[#CACACA] flex items-center justify-center space-x-2">
+                        <img src="https://developers.google.com/static/identity/images/g-logo.png" alt="Google Logo" class="w-6 h-6">
+                        <span class="font-semibold text-lg">Увійти через Google</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
