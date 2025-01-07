@@ -1,9 +1,11 @@
-<div class="bg-gradient-to-b from-[#006D77] to-[#83C5BE] flex flex-col justify-center xl:min-h-screen">
+<div class="animated-gradient-background flex flex-col justify-center xl:min-h-screen">
     <div class="flex flex-col items-center">
         <div class="w-full px-10 py-10 bg-white xl:rounded-lg xl:my-5 xl:w-1/2">
-            <h1 class="text-4xl font-medium">Створіть акаунт</h1>
+            <h1 class="text-4xl font-medium mt-4">Створіть акаунт</h1>
+            <p class="text-[#6C6C6C] text-md font-normal inline">Вже зареєстровані? </p>
+            <p class="text-[#6C6C6C] text-md font-normal inline hover:underline cursor-pointer" routerLink="/login">Увійдіть тут</p>
             <form #form="ngForm">
-                <div class="mt-5 w-full">
+                <div class="mt-5">
                     <label class="text-lg" for="username">Ім'я користувача <span class="text-red-600 font-bold">*</span></label>
                     <br>
                     <input 
