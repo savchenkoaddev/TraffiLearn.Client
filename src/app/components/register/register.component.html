@@ -1,1 +1,142 @@
-<p>register works!</p>
+<div class="bg-gradient-to-b from-[#006D77] to-[#83C5BE] flex flex-col justify-center xl:min-h-screen">
+    <div class="flex flex-col items-center">
+        <div class="w-full px-10 py-10 bg-white xl:rounded-lg xl:my-5 xl:w-1/2">
+            <h1 class="text-4xl font-medium">Створіть акаунт</h1>
+            <form #form="ngForm">
+                <div class="mt-5 w-full">
+                    <label class="text-lg" for="username">Ім'я користувача <span class="text-red-600 font-bold">*</span></label>
+                    <br>
+                    <input 
+                        [(ngModel)]="this.username" 
+                        #username="ngModel" 
+                        name="username" 
+                        type="text" 
+                        required 
+                        maxlength="30" 
+                        class="border-[1px] px-3 py-2 mt-2 w-full" 
+                        placeholder="Введіть ім'я користувача"
+                        [ngClass]="username.invalid && username.touched ? 'border-red-500' : ''">
+                    
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                        <p class="text-red-500 text-sm mt-1" *ngIf="username.hasError('required')">
+                            Ім'я користувача обов'язкове.
+                        </p>
+                        <p class="text-red-500 text-sm mt-1" *ngIf="username.hasError('maxlength')">
+                            Довжина імені користувача не повинна перевищувати 30 символів.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <label class="text-lg" for="email">Email <span class="text-red-600 font-bold">*</span></label>
+                    <br>
+                    <input 
+                        [(ngModel)]="this.email" 
+                        #email="ngModel" 
+                        required 
+                        maxlength="254" 
+                        email 
+                        name="email" 
+                        type="email" 
+                        class="border-[1px] px-3 py-2 mt-2 w-full" 
+                        placeholder="Введіть email"
+                        [ngClass]="email.invalid && email.touched ? 'border-red-500' : ''">
+
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <p class="text-red-500 text-sm mt-1" *ngIf="email.hasError('required')">
+                            Email обов'язковий.
+                        </p>
+                        <p class="text-red-500 text-sm mt-1" *ngIf="email.hasError('email')">
+                            Email повинен бути в правильному форматі.
+                        </p>
+                        <p class="text-red-500 text-sm mt-1" *ngIf="email.hasError('maxlength')">
+                            Довжина email не повинна перевищувати 254 символів.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <label class="text-lg" for="password">Пароль <span class="text-red-600 font-bold">*</span></label>
+                    <br>
+                    <div class="flex items-center border-[1px] border-[#CACACA] mt-2 h-11 w-full" [ngClass]="password.invalid && password.touched ? 'border-red-500' : ''">
+                        <input 
+                            [(ngModel)]="this.password" 
+                            [pattern]="passwordPattern" 
+                            #password="ngModel" 
+                            required 
+                            minlength="8" 
+                            maxlength="30" 
+                            [type]="passwordVisible ? 'text' : 'password'" 
+                            name="password" 
+                            type="password" 
+                            class="px-3 h-full w-full" 
+                            placeholder="Введіть пароль">
+                        <span 
+                            (click)="togglePasswordVisibility()" 
+                            class="cursor-pointer ml-2 mt-1 mr-3"
+                        >
+                            <span class="material-icons">
+                                {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+                            </span>
+                        </span>
+                    </div>
+
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <p class="text-red-500 text-sm mt-1" *ngIf="password.hasError('required')">
+                            Пароль обов'язковий.
+                        </p>
+                        <p class="text-red-500 text-sm mt-1" *ngIf="password.hasError('minlength')">
+                            Довжина пароля повинна бути щонайменше 8 символів.
+                        </p>
+                        <p class="text-red-500 text-sm mt-1" *ngIf="password.hasError('maxlength')">
+                            Довжина пароля не повинна перевищувати 30 символів.
+                        </p>
+                        <p class="text-red-500 text-sm mt-1" *ngIf="password.hasError('pattern')">
+                            Пароль повинен містити хоча б одну велику літеру, одну цифру і один спеціальний символ.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <label class="text-lg" for="confirmPassword">Підтвердження пароля <span class="text-red-600 font-bold">*</span></label>
+                    <br>
+                    <div class="flex items-center border-[1px] border-[#CACACA] mt-2 h-11 w-full" [ngClass]="confirmPassword.invalid || !isConfirmPasswordCorrect() && confirmPassword.touched ? 'border-red-500' : ''">
+                        <input 
+                            [(ngModel)]="this.confirmPassword" 
+                            [type]="passwordVisible ? 'text' : 'password'" 
+                            name="confirmPassword" 
+                            type="password" 
+                            class="px-3 h-full w-full" 
+                            placeholder="Підтвердіть пароль" 
+                            #confirmPassword="ngModel">
+                        <span (click)="togglePasswordVisibility()" class="cursor-pointer ml-2 mt-1 mr-3">
+                            <span class="material-icons">{{ passwordVisible ? 'visibility_off' : 'visibility' }}</span>
+                        </span>
+                    </div>
+                
+                    <div *ngIf="confirmPassword && !isConfirmPasswordCorrect() && confirmPassword.touched || confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                        <p class="text-red-500 text-sm mt-1" *ngIf="confirmPassword.hasError('required')">Підтвердження пароля обов'язкове.</p>
+                        <p class="text-red-500 text-sm mt-1" *ngIf="!isConfirmPasswordCorrect()">Паролі не збігаються.</p>
+                    </div>
+                </div>
+                
+                <button class="text-lg w-full mt-8 py-3 text-white " [ngClass]="form.invalid || !isConfirmPasswordCorrect() ? 'bg-[#62a2a8]' : 'bg-[#006D77]'" [disabled]="!form.valid || !isConfirmPasswordCorrect()">Зареєструватись</button>
+            </form>
+
+            <div class="flex items-center my-5">
+                <hr class="flex-1 border-t-[1px] border-gray-300">
+                <span class="mx-4 text-gray-600">Або</span>
+                <hr class="flex-1 border-t-[1px] border-gray-300">
+            </div>
+
+            <form >
+                <div class="w-full">
+                    <button type="submit" class="w-full p-3 border-[1px] border-[#CACACA] flex items-center justify-center space-x-2">
+                        <img src="https://developers.google.com/static/identity/images/g-logo.png" alt="Google Logo" class="w-6 h-6">
+                        <span class="text-lg">Увійти через Google</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
