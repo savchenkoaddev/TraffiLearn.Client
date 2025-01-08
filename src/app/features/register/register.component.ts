@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { FormButtonComponent } from "../../shared/components/auth/form-button/form-button.component";
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, FormButtonComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
