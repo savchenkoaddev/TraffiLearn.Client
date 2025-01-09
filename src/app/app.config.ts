@@ -2,8 +2,9 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
+import { accessTokenInterceptor } from './shared/interceptors/access-token/access-token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +19,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient()]
+    provideHttpClient(
+      withInterceptors([accessTokenInterceptor])),
+    ]
 };
