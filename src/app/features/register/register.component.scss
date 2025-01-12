@@ -1,0 +1,5 @@
+@import '../../assets/animations/background-animation';
+
+.animated-gradient-background {
+  @include animated-gradient-background;
+}

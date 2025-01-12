@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { RouterLink } from '@angular/router';
+import { FormButtonComponent } from "../../shared/components/auth/form-button/form-button.component";
+import { GoogleSignButtonComponent } from "../../shared/components/auth/google-sign-button/google-sign-button.component";
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,10 @@ import { CommonModule } from '@angular/common';
     MatCheckboxModule,
     FormsModule,
     RouterLink,
-    CommonModule
-  ],
+    CommonModule,
+    FormButtonComponent,
+    GoogleSignButtonComponent
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
