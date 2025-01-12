@@ -4,12 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { FormButtonComponent } from "../../shared/components/auth/form-button/form-button.component";
 import { GoogleSignButtonComponent } from "../../shared/components/auth/google-sign-button/google-sign-button.component";
-import { RegisterRequest } from '../../shared/models/requests/api/RegisterRequest';
 import { AuthService } from '../../shared/services/api/auth/auth.service';
-import { LocalStorageService } from '../../shared/services/local-storage/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
-import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandlingService } from '../../shared/services/error-handling/error-handling.service';
+import { RegisterRequest } from './models/RegisterRequest';
 
 @Component({
   selector: 'app-register',
@@ -29,12 +28,11 @@ export class RegisterComponent {
     password: ''
   };
 
-  confirmPassword: string = 'Owner123!.';
+  confirmPassword: string = '';
   passwordVisible: boolean = false;
   passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,30}$/;
 
   authService = inject(AuthService);
-  localStorageService = inject(LocalStorageService);
   router = inject(Router);
   toastr = inject(ToastrService);
   errorHandler = inject(ErrorHandlingService);

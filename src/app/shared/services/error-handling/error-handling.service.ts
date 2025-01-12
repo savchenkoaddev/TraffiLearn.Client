@@ -1,7 +1,6 @@
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Error } from '../../models/errors/Error';
 import { ApiErrorsDictionary } from '../../models/errors/ApiErrors/ApiErrorsDictionary';
 
 @Injectable({
@@ -12,8 +11,11 @@ export class ErrorHandlingService {
 
   handleHttpError(error: HttpErrorResponse): void {
     switch (error.status) {
+      case HttpStatusCode.NotFound:
+        this.processClientError(error);
+        break;
       case HttpStatusCode.BadRequest:
-        this.processBadRequest(error);
+        this.processClientError(error);
         break;
       case HttpStatusCode.TooManyRequests:
         this.toastr.error('Забагато запитів.', 'Помилка');
@@ -27,7 +29,7 @@ export class ErrorHandlingService {
     }
   }
 
-  private processBadRequest(error: HttpErrorResponse): void {
+  private processClientError(error: HttpErrorResponse): void {
     let apiError = error.error;
 
     if (Array.isArray(apiError.errors)) {
