@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterLink } from '@angular/router';
 import { FormButtonComponent } from "../../shared/components/auth/form-button/form-button.component";
+import { GoogleSignButtonComponent } from "../../shared/components/auth/google-sign-button/google-sign-button.component";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import { FormButtonComponent } from "../../shared/components/auth/form-button/fo
     FormsModule,
     RouterLink,
     CommonModule,
-    FormButtonComponent
+    FormButtonComponent,
+    GoogleSignButtonComponent
 ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'

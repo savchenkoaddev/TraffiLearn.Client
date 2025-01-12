@@ -4,12 +4,12 @@
             <h1 class="text-4xl font-medium mt-4">Створіть акаунт</h1>
             <p class="text-[#6C6C6C] text-md font-normal inline">Вже зареєстровані? </p>
             <p class="text-[#6C6C6C] text-md font-normal inline hover:underline cursor-pointer" routerLink="/login">Увійдіть тут</p>
-            <form #form="ngForm">
+            <form #form="ngForm" (ngSubmit)="onRegisterSubmit()">
                 <div class="mt-5">
                     <label class="text-lg" for="username">Ім'я користувача <span class="text-red-600 font-bold">*</span></label>
                     <br>
                     <input 
-                        [(ngModel)]="this.username" 
+                        [(ngModel)]="this.registerRequest.username" 
                         #username="ngModel" 
                         name="username" 
                         type="text" 
@@ -33,7 +33,7 @@
                     <label class="text-lg" for="email">Email <span class="text-red-600 font-bold">*</span></label>
                     <br>
                     <input 
-                        [(ngModel)]="this.email" 
+                        [(ngModel)]="this.registerRequest.email" 
                         #email="ngModel" 
                         required 
                         maxlength="254" 
@@ -62,7 +62,7 @@
                     <br>
                     <div class="flex items-center border-[1px] border-[#CACACA] mt-2 h-11 w-full" [ngClass]="password.invalid && password.touched ? 'border-red-500' : ''">
                         <input 
-                            [(ngModel)]="this.password" 
+                            [(ngModel)]="this.registerRequest.password" 
                             [pattern]="passwordPattern" 
                             #password="ngModel" 
                             required 
